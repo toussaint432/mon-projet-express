@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — Mon Express App</title>
+
+  <!-- Chart.js CDN (petit et pratique) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🔮</div>
+        <h1>MonDash</h1>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-item active" href="#"><span>🏠</span><span>Accueil</span></a>
+        <a class="nav-item" href="#"><span>📈</span><span>Analytics</span></a>
+        <a class="nav-item" href="#"><span>⚙️</span><span>Settings</span></a>
+        <a class="nav-item" href="#"><span>👤</span><span>Profil</span></a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <small>Version 1.0</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <input id="search" placeholder="Rechercher..." />
+        </div>
+        <div class="top-actions">
+          <button id="themeToggle">✨ Thème</button>
+          <div class="avatar">TG</div>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="greeting glass">
+          <div>
+            <h2 id="greet-title">Bienvenue !</h2>
+            <p id="greet-sub">Dashboard — Chargement des données...</p>
+          </div>
+          <div class="greet-cta">
+            <button id="refreshBtn">Refresh</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card stat glass">
+            <h3>Requêtes / s</h3>
+            <p id="rps">—</p>
+          </div>
+
+          <div class="card stat glass">
+            <h3>Pods actifs</h3>
+            <p id="pods">—</p>
+          </div>
+
+          <div class="card chart-card glass">
+            <h3>CPU (%) - exemple</h3>
+            <canvas id="cpuChart"></canvas>
+          </div>
+
+          <div class="card log-card glass">
+            <h3>API</h3>
+            <p id="apiMessage">—</p>
+            <button id="callApi">Appeler /api/hello</button>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <small>Design Gradient futuriste • Testé pour dev local & Kubernetes</small>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

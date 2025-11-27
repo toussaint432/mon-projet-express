@@ -1,0 +1,18 @@
+apiVersion: autoscaling/v2           # Version de l'API HPA, v2 permet l'utilisation de metrics personnalisées
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mon-express-hpa              # Nom de l'HPA
+spec:
+  scaleTargetRef:                    # Référence vers le Deployment à scaler
+    apiVersion: apps/v1              # Version de l'API du Deployment
+    kind: Deployment                 # Type de ressource
+    name: mon-express-deployment     # Nom exact du Deployment que tu veux scaler
+  minReplicas: 2                     # Nombre minimum de pods
+  maxReplicas: 10                    # Nombre maximum de pods
+  metrics:                           # Définition de la métrique pour le scaling
+  - type: Resource                   # Type de métrique : Resource = CPU ou mémoire
+    resource:
+      name: cpu                      # Nom de la ressource à monitorer
+      target:
+        type: Utilization            # Scaling basé sur l'utilisation en pourcentage
+        averageUtilization: 50       # On scale si l'utilisation moyenne dépasse 50%

@@ -1,0 +1,27 @@
+# Node
+node_modules/             # Dossier des dépendances, ne doit pas être versionné
+npm-debug.log             # Logs de npm
+package-lock.json         # Optionnel selon ton workflow (si tu veux verrouiller les versions, tu peux le garder)
+
+# Logs
+logs/                     # Dossier des logs (si existant)
+*.log                     # Tous les fichiers logs
+
+# Environnement
+.env                       # Fichiers d'environnement (ex : clés API, secrets)
+
+# MacOS
+.DS_Store                 # Fichiers système Mac
+
+# Docker
+.dockerignore             # Ignore le fichier .dockerignore lui-même (optionnel)
+
+# Kubernetes
+*.yaml                    # Ignore tous les fichiers YAML
+!k8s/deployment.yaml      # Sauf ceux dans k8s/ nécessaires
+!k8s/service.yaml
+!k8s/hpa.yaml
+
+# Autres dossiers/fichiers générés
+dist/                      # Fichiers compilés (si tu as un build)
+coverage/                  # Rapports de tests

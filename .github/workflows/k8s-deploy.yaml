@@ -1,0 +1,48 @@
+# Nom du workflow GitHub Actions
+name: CI-CD K8S
+
+# Déclencheur du workflow : ici, à chaque push sur la branche "main"
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  # Définition du job principal nommé "build"
+  build:
+    # Le job s'exécute sur une machine virtuelle Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+    # Étape 1 : Récupérer le code de ton dépôt GitHub
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Étape 2 : Préparer Docker pour construire des images
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v3
+
+    # Étape 3 : Démarrer Minikube pour avoir un cluster Kubernetes local
+    - name: Start Minikube
+      uses: medyagh/setup-minikube@latest
+
+    # Étape 4 : Construire l'image Docker à l'intérieur de Minikube
+    - name: Build Docker image inside Minikube
+      run: |
+        # Configurer l'environnement pour utiliser le Docker de Minikube
+        eval $(minikube docker-env)
+        # Construire l'image Docker avec le tag 'mon-express-app:latest'
+        docker build -t mon-express-app:latest .
+
+    # Étape 5 : Déployer l'application sur Kubernetes
+    - name: Deploy to Kubernetes
+      run: |
+        # Appliquer tous les manifests Kubernetes dans le dossier k8s/
+        kubectl apply -f k8s/
+        # Redémarrer le Deployment pour appliquer la nouvelle image
+        kubectl rollout restart deployment mon-express-deployment
+
+    # Étape 6 : Vérifier que les pods sont bien en cours d'exécution
+    - name: Check pods
+      run: |
+        kubectl get pods
+        kubectl get services

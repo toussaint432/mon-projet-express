@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mon-express-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mon-express
+  template:
+    metadata:
+      labels:
+        app: mon-express
+    spec:
+      containers:
+      - name: mon-express
+        image: mon-express-app:latest
+        imagePullPolicy: Never   # Utilise l’image locale Minikube
+        ports:
+        - containerPort: 3400
+        resources:
+          requests:
+            cpu: "100m"          # CPU minimum requis
+            memory: "128Mi"      # RAM minimum requise
+          limits:
+            cpu: "500m"          # CPU maximum autorisé
+            memory: "256Mi"      # RAM maximum autorisée
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mon-express-service
+spec:
+  type: NodePort
+  selector:
+    app: mon-express
+  ports:
+    - port: 3400          # Port du service
+      targetPort: 3400    # Port du conteneur
+      nodePort: 30080     # Port accessible sur Minikube
