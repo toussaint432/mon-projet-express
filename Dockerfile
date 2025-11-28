@@ -23,3 +23,5 @@ ENV PORT=3400
 
 # Commande de démarrage
 CMD ["node", "server.js"]
+
+# Fin du Dockerfile
