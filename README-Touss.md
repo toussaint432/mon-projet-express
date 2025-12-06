@@ -1,7 +1,10 @@
  Projet Node.js – Docker – Kubernetes – CI/CD
 
+<<<<<<< HEAD
 Ce projet présente une application Node.js containerisée avec Docker, déployée sur Kubernetes via Minikube, et automatisée avec un pipeline CI/CD GitHub Actions.
 
+=======
+>>>>>>> develop
  1. Lancer l’application en local
 Installer les dépendances:
 npm install
@@ -92,7 +95,26 @@ Si erreur → installer metrics-server.
 
 Créer un HPA basé sur l’usage CPU :
 
+<<<<<<< HEAD
 kubectl autoscale deployment mon-express --cpu-percent=50 --min=2 --max=10
+=======
+kubectl autoscale deployment mon-express-deployment --cpu=50% --min=2 --max=10
+
+{
+    Mettre à jour l’HPA existant:
+kubectl patch hpa mon-express-deployment -p '{"spec":{"targetCPUUtilizationPercentage":5}}'
+
+    Cela change le seuil CPU à 5% sans recréer l’HPA
+
+    ou bien Supprimer l’HPA existant et en recréer un
+
+kubectl delete hpa mon-express-deployment
+kubectl autoscale deployment mon-express-deployment --cpu=5% --min=2 --max=10
+
+Ceci recrée l’HPA avec le nouveau seuil.
+}
+
+>>>>>>> develop
 
 Vérifier :
 
@@ -106,6 +128,14 @@ Installer hey (si pas installé) :
 brew install hey
 
 Simuler 50 utilisateurs pendant 30s :
+<<<<<<< HEAD
+=======
+{
+    Obrtenir le nodeport:  kubectl get svc mon-express-service
+                     url:  minikube service mon-express-service --url
+}
+
+>>>>>>> develop
 
 hey -z 30s -c 50 http://<ip-minikube>:<nodeport>/
 
@@ -160,6 +190,7 @@ Compatible macOS + Minikube Docker driver
     └── ci-cd.yaml
 
 
+<<<<<<< HEAD
  Objectif pédagogique
 
 Ce projet démontre la maîtrise de :
@@ -169,3 +200,5 @@ Kubernetes (Minikube)
 Autoscaling
 CI/CD GitHub Actions
 Bonne structuration de projet DevOps
+=======
+>>>>>>> develop
