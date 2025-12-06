@@ -4,7 +4,7 @@ name: CI-CD K8S
 # Déclencheur du workflow : ici, à chaque push sur la branche "main"
 on:
   push:
-    branches: ["dev"]
+    branches: ["main"]
 
 jobs:
   # Définition du job principal nommé "build"
