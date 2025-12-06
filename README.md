@@ -102,7 +102,7 @@ kubectl apply -f service.yaml
 
 Kubernetes essayait de récupérer l’image depuis Docker Hub.
 
-👉 Solution : ajouter `imagePullPolicy: Never`.
+ Solution : ajouter `imagePullPolicy: Never`.
 
 Ensuite, redémarrer les pods :
 

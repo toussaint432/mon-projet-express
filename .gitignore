@@ -1,4 +1,5 @@
 # Node
+
 node_modules/             # Dossier des dépendances, ne doit pas être versionné
 npm-debug.log             # Logs de npm
 package-lock.json         # Optionnel selon ton workflow (si tu veux verrouiller les versions, tu peux le garder)
